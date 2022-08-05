@@ -12,27 +12,27 @@
 
 #include "ft_printf_bonus.h"
 
-void	scan_flag(char **form, t_elem *info)
+int	scan_flag(char *form, int idx, t_elem *info)
 {
 
 }
 
-void	scan_wid(char **form, t_elem *info)
+int	scan_wid(char *form, int idx, t_elem *info)
 {
 
 }
 
-void	scan_prec(char **form, t_elem *info)
+int	scan_prec(char *form, int idx, t_elem *info)
 {
 
 }
 
-void	scan_len(char **form, t_elem *info)
+int	scan_len(char *form, int idx, t_elem *info)
 {
 
 }
 
-void	scan_spec(char **form, t_elem *info)
+int	scan_spec(char *form, int idx, t_elem *info)
 {
 
 }

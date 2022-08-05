@@ -70,18 +70,18 @@ typedef struct s_elem
 	size_t			precision;
 }	t_elem;
 
-int		ft_printf(const char *format, ...);
-int		ft_vfprintf(const char *format, va_list ap);
+int	ft_printf(const char *format, ...);
+int	ft_vfprintf(const char *format, va_list ap);
 
-void	scan_spec(char **form, t_elem *info);
-void	scan_flag(char **form, t_elem *info);
-void	scan_wid(char **form, t_elem *info);
-void	scan_prec(char **form, t_elem *info);
-void	scan_len(char **form, t_elem *info);
-int		check_spec(t_elem *info);
-int		check_flag(t_elem *info);
-int		check_wid(t_elem *info);
-int		check_prec(t_elem *info);
-int		check_len(t_elem *info);
+int	scan_spec(char *form, int idx, t_elem *info);
+int	scan_flag(char *form, int idx, t_elem *info);
+int	scan_wid(char *form, int idx, t_elem *info);
+int	scan_prec(char *form, int idx, t_elem *info);
+int	scan_len(char *form, int idx, t_elem *info);
+int	check_spec(t_elem *info);
+int	check_flag(t_elem *info);
+int	check_wid(t_elem *info);
+int	check_prec(t_elem *info);
+int	check_len(t_elem *info);
 
 #endif

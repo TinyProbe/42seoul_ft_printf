@@ -41,23 +41,14 @@ int	ft_vfprintf(const char *format, va_list ap)
 
 char	*set_info(char *format, t_elem *info)
 {
-	char	form[100000];
-	char	*cur;
 	int		idx;
 
-	while (*format)
-	{
-		form[idx++] = *format++;
-		if (isspec(form[idx - 1]))
-			break;
-	}
-	form[idx] = '\0';
-	cur = form;
-	scan_flag(&cur, info);
-	scan_wid(&cur, info);
-	scan_prec(&cur, info);
-	scan_len(&cur, info);
-	scan_spec(&cur, info);
+	idx = 0;
+	idx = scan_flag(format, idx, info);
+	idx = scan_wid(format, idx, info);
+	idx = scan_prec(format, idx, info);
+	idx = scan_len(format, idx, info);
+	scan_spec(format, idx, info);
 	if (!check_spec(info) || !check_flag(info) || !check_wid(info) ||
 			!check_prec(info) || !check_len(info))
 		return (0);
