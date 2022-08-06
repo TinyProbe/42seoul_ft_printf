@@ -48,16 +48,16 @@
 
 # define PREC_NUM		1
 # define PREC_STAR		2
+# define PREC_DOT		4
 
-# define LEN_NONE		1
+# define LEN_H			1
 # define LEN_HH			2
-# define LEN_H			4
-# define LEN_L			8
-# define LEN_LL			16
-# define LEN_J			32
-# define LEN_Z			64
-# define LEN_T			128
-# define LEN_L_UP		256
+# define LEN_L			4
+# define LEN_LL			8
+# define LEN_J			16
+# define LEN_Z			32
+# define LEN_T			64
+# define LEN_L_UP		128
 
 typedef struct s_elem
 {
@@ -83,6 +83,8 @@ int	is_wid(int c);
 int	is_prec(int c);
 int	is_len(int c);
 int	is_spec(int c);
+int	is_spec_part1(int c);
+int	is_spec_part2(int c);
 int	check_spec(t_elem *info);
 int	check_flag(t_elem *info);
 int	check_wid(t_elem *info);
