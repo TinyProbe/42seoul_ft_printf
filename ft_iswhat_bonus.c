@@ -12,4 +12,27 @@
 
 #include "ft_printf_bonus.h"
 
+int	is_flag(int c)
+{
 
+}
+
+int	is_wid(int c)
+{
+
+}
+
+int	is_prec(int c)
+{
+
+}
+
+int	is_len(int c)
+{
+
+}
+
+int	is_spec(int c)
+{
+
+}

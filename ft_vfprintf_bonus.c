@@ -48,11 +48,11 @@ char	*set_info(char *format, t_elem *info)
 	idx = scan_wid(format, idx, info);
 	idx = scan_prec(format, idx, info);
 	idx = scan_len(format, idx, info);
-	scan_spec(format, idx, info);
+	idx = scan_spec(format, idx, info);
 	if (!check_spec(info) || !check_flag(info) || !check_wid(info) ||
 			!check_prec(info) || !check_len(info))
 		return (0);
-	return (format);
+	return (format + idx);
 }
 
 size_t	cat_arg(char *buf, va_list ap, t_elem *info)
