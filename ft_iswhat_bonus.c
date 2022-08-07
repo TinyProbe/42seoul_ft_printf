@@ -38,12 +38,12 @@ int	is_wid(int c)
 
 int	is_prec(int c)
 {
+	if (c == '.')
+		return (PREC_DOT);
 	if (c >= '0' && c <= '9')
 		return (PREC_NUM);
 	if (c == '*')
 		return (PREC_STAR);
-	if (c == '.')
-		return (PREC_DOT);
 	return (0);
 }
 

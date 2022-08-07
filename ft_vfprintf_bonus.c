@@ -13,13 +13,13 @@
 #include "ft_printf_bonus.h"
 
 char	*set_info(char *format, t_elem *info);
-size_t	cat_arg(char *buf, va_list ap, t_elem *info);
+idx		cat_arg(char *buf, int idx, va_list ap, t_elem *info);
 
 int	ft_vfprintf(const char *format, va_list ap)
 {
 	char	buf[100000];
-	t_elem	info;
 	int		idx;
+	t_elem	info;
 
 	idx = 0;
 	while (*format)
@@ -30,7 +30,7 @@ int	ft_vfprintf(const char *format, va_list ap)
 			format = (const char *) set_info(format + 1, &info); // need check format position
 			if (!format)
 				return (-1);
-			idx += cat_arg(buf + idx, ap, &info); // is exact length?
+			idx = cat_arg(buf, idx, ap, &info); // is exact length?
 		}
 		else
 			buf[idx++] = *format++;
@@ -55,7 +55,7 @@ char	*set_info(char *format, t_elem *info)
 	return (format + idx);
 }
 
-size_t	cat_arg(char *buf, va_list ap, t_elem *info)
+idx	cat_arg(char *buf, int idx, va_list ap, t_elem *info)
 {
 	return (0);
 }

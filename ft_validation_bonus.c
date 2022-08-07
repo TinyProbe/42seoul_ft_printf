@@ -12,32 +12,27 @@
 
 #include "ft_printf_bonus.h"
 
-int	check_spec(t_elem *info)
-{
-	(void) info;
-	return (0);
-}
-
 int	check_flag(t_elem *info)
 {
-	(void) info;
-	return (0);
+
 }
 
 int	check_wid(t_elem *info)
 {
-	(void) info;
-	return (0);
+
 }
 
 int	check_prec(t_elem *info)
 {
-	(void) info;
-	return (0);
+
 }
 
 int	check_len(t_elem *info)
 {
-	(void) info;
-	return (0);
+
+}
+
+int	check_spec(t_elem *info)
+{
+
 }

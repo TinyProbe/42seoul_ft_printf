@@ -16,73 +16,72 @@ int	scan_flag(char *form, int idx, t_elem *info)
 {
 	int	tmp;
 
-	tmp = 0;
-	while (1)
+	tmp = is_flag(form[idx++]);
+	while (tmp)
 	{
-		tmp = is_flag(form[idx++]);
-		if (!tmp)
-			break ;
 		info->flag |= tmp;
+		tmp = is_flag(form[idx++]);
 	}
-	return (idx);
+	return (idx - 1);
 }
 
 int	scan_wid(char *form, int idx, t_elem *info)
 {
 	int	tmp;
 
-	tmp = 0;
-	while (1)
+	tmp = is_wid(form[idx++]);
+	while (tmp)
 	{
-		tmp = is_wid(form[idx++]);
-		if (!tmp)
-			break ;
 		info->wid |= tmp;
+		if (tmp & WID_NUM)
+			info->width = info->width * 10 + (form[idx - 1] - '0');
+		tmp = is_wid(form[idx++]);
 	}
-	return (idx);
+	return (idx - 1);
 }
 
 int	scan_prec(char *form, int idx, t_elem *info)
 {
 	int	tmp;
 
-	tmp = 0;
-	while (1)
+	tmp = is_prec(form[idx++]);
+	if (tmp & PREC_DOT)
 	{
-		tmp = is_flag(form[idx++]);
-		if (!tmp)
-			break ;
-		info->flag += tmp;
+		info->prec |= tmp;
+		tmp = is_prec(form[idx++]);
+		while (tmp)
+		{
+			info->prec |= tmp;
+			if (tmp & PREC_NUM)
+				info->precis = info->precis * 10 + (form[idx - 1] - '0');
+			tmp = is_prec(form[idx++]);
+		}
 	}
-	return (idx);
+	return (idx - 1);
 }
 
 int	scan_len(char *form, int idx, t_elem *info)
 {
 	int	tmp;
 
-	tmp = 0;
-	while (1)
+	tmp = is_len(form[idx++]);
+	while (tmp)
 	{
-		tmp = is_flag(form[idx++]);
-		if (!tmp)
-			break ;
-		info->flag += tmp;
+		info->len += tmp;
+		tmp = is_len(form[idx++]);
 	}
-	return (idx);
+	return (idx - 1);
 }
 
 int	scan_spec(char *form, int idx, t_elem *info)
 {
 	int	tmp;
 
-	tmp = 0;
-	while (1)
+	tmp = is_spec(form[idx++]);
+	while (tmp)
 	{
-		tmp = is_flag(form[idx++]);
-		if (!tmp)
-			break ;
-		info->flag += tmp;
+		info->spec |= tmp;
+		tmp = is_spec(form[idx++]);
 	}
-	return (idx);
+	return (idx - 1);
 }
