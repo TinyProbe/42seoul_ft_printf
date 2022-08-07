@@ -32,6 +32,8 @@ int	ft_vfprintf(const char *format, va_list ap)
 				return (-1);
 			idx = cat_arg(buf, idx, ap, &info); // is exact length?
 		}
+		else if (*format == '\\')
+			format = esc_process(format + 1, buf, idx++);
 		else
 			buf[idx++] = *format++;
 	}
