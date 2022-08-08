@@ -6,7 +6,7 @@
 #    By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 12:24:20 by tkong             #+#    #+#              #
-#    Updated: 2022/08/05 17:45:56 by tkong            ###   ########.fr        #
+#    Updated: 2022/08/08 09:02:23 by tkong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,14 @@ SRC_M		= ft_printf.c			\
 			  ft_validation.c		\
 			  ft_form.c				\
 			  ft_iswhat.c			\
+			  ft_iswhat2.c			\
 
 SRC_B		= ft_printf_bonus.c		\
 			  ft_vfprintf_bonus.c	\
 			  ft_validation_bonus.c	\
 			  ft_form_bonus.c		\
 			  ft_iswhat_bonus.c		\
+			  ft_iswhat2_bonus.c	\
 
 OBJ_M		= $(SRC_M:.c=.o)
 OBJ_B		= $(SRC_B:.c=.o)

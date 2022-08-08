@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 08:32:34 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/05 13:01:33 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/08 14:53:12 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,48 @@
 
 int	check_flag(t_elem *info)
 {
-
+	if (info->flag & FLAG_MINUS && info->flag & FLAG_ZERO)
+		return (0);
+	if (info->flag & FLAG_PLUS && info->flag & FLAG_SPACE)
+		return (0);
+	if (info->spec & (SPEC_O | SPEC_X | SPEC_X_UP)
+		&& (info->flag & FLAG_SHARP && info->flag & FLAG_PLUS)
+		|| (info->flag & FLAG_SHARP && info->flag & FLAG_SPACE))
+		return (0);
+	if (info->flag & FLAG_MINUS && !check_combi_minus(info))
+		return (0);
+	if (info->flag & FLAG_PLUS && !check_combi_plus(info))
+		return (0);
+	if (info->flag & FLAG_SPACE && !check_combi_space(info))
+		return (0);
+	if (info->flag & FLAG_SHARP && !check_combi_sharp(info))
+		return (0);
+	if (info->flag & FLAG_ZERO && !check_combi_zero(info))
+		return (0);
+	return (1);
 }
 
 int	check_wid(t_elem *info)
 {
-
+	return (!(info->wid & WID_NUM && info->wid & WID_STAR));
 }
 
 int	check_prec(t_elem *info)
 {
-
+	if (info->prec & PREC_NUM && info->prec & PREC_STAR)
+		return (0);
+	if (info->prec & (PREC_NUM | PREC_STAR)
+		&& info->spec & (SPEC_C | SPEC_P | SPEC_N))
+		return (0);
+	return (1);
 }
 
 int	check_len(t_elem *info)
 {
-
+	return (!info->len);
 }
 
 int	check_spec(t_elem *info)
 {
-
+	return (info->spec);
 }

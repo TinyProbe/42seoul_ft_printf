@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_iswhat2_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/08 09:02:48 by tkong             #+#    #+#             */
+/*   Updated: 2022/08/08 14:37:36 by tkong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int is_spec_part1(int c)
+int	is_spec_part1(int c)
 {
 	if (c == 'd' || c == 'i')
 		return (SPEC_D_OR_I);
@@ -24,7 +35,7 @@ int is_spec_part1(int c)
 	return (0);
 }
 
-int is_spec_part2(int c)
+int	is_spec_part2(int c)
 {
 	if (c == 'g')
 		return (SPEC_G);

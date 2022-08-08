@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 07:08:58 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/05 14:42:51 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/08 14:43:28 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,10 @@ int	check_wid(t_elem *info);
 int	check_prec(t_elem *info);
 int	check_len(t_elem *info);
 int	check_spec(t_elem *info);
+int	check_combi_minus(t_elem *info);
+int	check_combi_plus(t_elem *info);
+int	check_combi_space(t_elem *info);
+int	check_combi_sharp(t_elem *info);
+int	check_combi_zero(t_elem *info);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:25:59 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/05 14:45:52 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/08 12:50:58 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ int	scan_spec(char *form, int idx, t_elem *info)
 	int	tmp;
 
 	tmp = is_spec(form[idx++]);
-	while (tmp)
-	{
+	if (tmp)
 		info->spec |= tmp;
-		tmp = is_spec(form[idx++]);
-	}
-	return (idx - 1);
+	return (idx);
 }
