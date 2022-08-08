@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 08:32:34 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/08 14:53:12 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/08 16:51:47 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	check_flag(t_elem *info)
 {
-	if (info->flag & FLAG_MINUS && info->flag & FLAG_ZERO)
+	if (!(info->flag ^ (FLAG_MINUS | FLAG_ZERO)))
 		return (0);
-	if (info->flag & FLAG_PLUS && info->flag & FLAG_SPACE)
+	if (!(info->flag ^ (FLAG_PLUS | FLAG_SPACE)))
 		return (0);
 	if (info->spec & (SPEC_O | SPEC_X | SPEC_X_UP)
-		&& (info->flag & FLAG_SHARP && info->flag & FLAG_PLUS)
-		|| (info->flag & FLAG_SHARP && info->flag & FLAG_SPACE))
+		&& !(info->flag ^ (FLAG_SHARP | FLAG_PLUS))
+		|| !(info->flag ^ (FLAG_SHARP | FLAG_SPACE)))
 		return (0);
 	if (info->flag & FLAG_MINUS && !check_combi_minus(info))
 		return (0);
@@ -37,12 +37,12 @@ int	check_flag(t_elem *info)
 
 int	check_wid(t_elem *info)
 {
-	return (!(info->wid & WID_NUM && info->wid & WID_STAR));
+	return (info->wid ^ (WID_NUM | WID_STAR));
 }
 
 int	check_prec(t_elem *info)
 {
-	if (info->prec & PREC_NUM && info->prec & PREC_STAR)
+	if (!(info->prec ^ (PREC_NUM | PREC_STAR)))
 		return (0);
 	if (info->prec & (PREC_NUM | PREC_STAR)
 		&& info->spec & (SPEC_C | SPEC_P | SPEC_N))

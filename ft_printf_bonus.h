@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 07:08:58 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/08 14:43:28 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/08 19:11:19 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,56 +18,58 @@
 # include <stdarg.h>
 # include "./libft/libft.h"
 
-# define FLAG_MINUS		1
-# define FLAG_PLUS		2
-# define FLAG_SPACE		4
-# define FLAG_SHARP		8
-# define FLAG_ZERO		16
+# define UINT32			unsigned int
 
-# define WID_NUM		1
-# define WID_STAR		2
+# define FLAG_MINUS		1u
+# define FLAG_PLUS		2u
+# define FLAG_SPACE		4u
+# define FLAG_SHARP		8u
+# define FLAG_ZERO		16u
 
-# define PREC_DOT		1
-# define PREC_NUM		2
-# define PREC_STAR		4
+# define WID_NUM		1u
+# define WID_STAR		2u
 
-# define LEN_H			1
-# define LEN_HH			2
-# define LEN_L			4
-# define LEN_LL			8
-# define LEN_J			16
-# define LEN_Z			32
-# define LEN_T			64
-# define LEN_L_UP		128
+# define PREC_DOT		1u
+# define PREC_NUM		2u
+# define PREC_STAR		4u
 
-# define SPEC_D_OR_I	1
-# define SPEC_U			2
-# define SPEC_O			4
-# define SPEC_X			8
-# define SPEC_X_UP		16
-# define SPEC_F			32
-# define SPEC_F_UP		64
-# define SPEC_E			128
-# define SPEC_E_UP		256
-# define SPEC_G			512
-# define SPEC_G_UP		1024
-# define SPEC_A			2048
-# define SPEC_A_UP		4096
-# define SPEC_C			8192
-# define SPEC_S			16384
-# define SPEC_P			32768
-# define SPEC_N			65536
-# define SPEC_PERCENT	131072
+# define LEN_H			1u
+# define LEN_HH			2u
+# define LEN_L			4u
+# define LEN_LL			8u
+# define LEN_J			16u
+# define LEN_Z			32u
+# define LEN_T			64u
+# define LEN_L_UP		128u
+
+# define SPEC_D_OR_I	1u
+# define SPEC_U			2u
+# define SPEC_O			4u
+# define SPEC_X			8u
+# define SPEC_X_UP		16u
+# define SPEC_F			32u
+# define SPEC_F_UP		64u
+# define SPEC_E			128u
+# define SPEC_E_UP		256u
+# define SPEC_G			512u
+# define SPEC_G_UP		1024u
+# define SPEC_A			2048u
+# define SPEC_A_UP		4096u
+# define SPEC_C			8192u
+# define SPEC_S			16384u
+# define SPEC_P			32768u
+# define SPEC_N			65536u
+# define SPEC_PERCENT	131072u
 
 typedef struct s_elem
 {
-	unsigned int	flag;
-	unsigned int	wid;
-	unsigned int	prec;
-	unsigned int	len;
-	unsigned int	spec;
-	size_t			width;
-	size_t			precis;
+	UINT32	flag;
+	UINT32	wid;
+	UINT32	prec;
+	UINT32	len;
+	UINT32	spec;
+	size_t	width;
+	size_t	precis;
 }	t_elem;
 
 int	ft_printf(const char *format, ...);

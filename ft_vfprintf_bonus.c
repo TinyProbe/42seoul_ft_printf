@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:47 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/08 14:54:25 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/08 19:13:23 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char	*set_info(char *format, t_elem *info);
 static int	cat_arg(char *buf, int idx, va_list ap, t_elem *info);
+static char	*form_calculation(va_list ap, t_elem *info);
 
 int	ft_vfprintf(const char *format, va_list ap)
 {
@@ -57,10 +58,24 @@ static char	*set_info(char *format, t_elem *info)
 
 static int	cat_arg(char *buf, int idx, va_list ap, t_elem *info)
 {
-	info->flag;
-	info->wid;
-	info->prec;
-	info->len;
-	info->spec;
+	char	*form;
+
+	form = form_calculation(ap, info);
+	while (*form)
+		buf[idx++] = *form++;
+	free(form);
 	return (idx);
+}
+
+static char	*form_calculation(va_list ap, t_elem *info)
+{
+	char	*res;
+	char	*trg;
+
+	trg = cvs_spec(ap, info);
+	trg = app_prec(ap, info, trg);
+	trg = app_base(ap, info, trg);
+	trg = app_sign(ap, info, trg);
+	if (!info->wid)
+		return (trg);
 }

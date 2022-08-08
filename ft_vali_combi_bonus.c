@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:01:31 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/08 14:50:59 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/08 19:12:36 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	check_combi_space(t_elem *info)
 
 int	check_combi_sharp(t_elem *info)
 {
-	return (info->spec & (SPEC_O | SPEC_X | SPEC_X_UP));
+	return (info->spec & (SPEC_O | SPEC_X | SPEC_X_UP
+			| SPEC_PERCENT));
 }
 
 int	check_combi_zero(t_elem *info)
