@@ -19,6 +19,7 @@ ARFLAG		= rcs
 SRC_M		= ft_printf.c			\
 			  ft_vfprintf.c			\
 			  ft_validation.c		\
+			  ft_vali_combi.c		\
 			  ft_form.c				\
 			  ft_iswhat.c			\
 			  ft_iswhat2.c			\
@@ -26,6 +27,7 @@ SRC_M		= ft_printf.c			\
 SRC_B		= ft_printf_bonus.c		\
 			  ft_vfprintf_bonus.c	\
 			  ft_validation_bonus.c	\
+			  ft_vali_combi_bonus.c	\
 			  ft_form_bonus.c		\
 			  ft_iswhat_bonus.c		\
 			  ft_iswhat2_bonus.c	\
