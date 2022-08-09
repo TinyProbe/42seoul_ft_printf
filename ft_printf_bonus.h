@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <limits.h>
 # include "./libft/libft.h"
 
 # define UINT32			unsigned int
@@ -61,41 +62,52 @@
 # define SPEC_N			65536u
 # define SPEC_PERCENT	131072u
 
+# define LOWER			1u
+# define UPPER			2u
+
 typedef struct s_elem
 {
-	UINT32	flag;
-	UINT32	wid;
-	UINT32	prec;
-	UINT32	len;
-	UINT32	spec;
-	size_t	width;
-	size_t	precis;
+	UINT32		flag;
+	UINT32		wid;
+	UINT32		prec;
+	UINT32		len;
+	UINT32		spec;
+	size_t		width;
+	size_t		precis;
+	char		res[INT_MAX];
+	int			begin;
+	int			end;
+	int			neg;
 }	t_elem;
 
-int	ft_printf(const char *format, ...);
-int	ft_vfprintf(const char *format, va_list ap);
-
-int	scan_flag(char *form, int idx, t_elem *info);
-int	scan_wid(char *form, int idx, t_elem *info);
-int	scan_prec(char *form, int idx, t_elem *info);
-int	scan_len(char *form, int idx, t_elem *info);
-int	scan_spec(char *form, int idx, t_elem *info);
-int	is_flag(int c);
-int	is_wid(int c);
-int	is_prec(int c);
-int	is_len(int c);
-int	is_spec(int c);
-int	is_spec_part1(int c);
-int	is_spec_part2(int c);
-int	check_flag(t_elem *info);
-int	check_wid(t_elem *info);
-int	check_prec(t_elem *info);
-int	check_len(t_elem *info);
-int	check_spec(t_elem *info);
-int	check_combi_minus(t_elem *info);
-int	check_combi_plus(t_elem *info);
-int	check_combi_space(t_elem *info);
-int	check_combi_sharp(t_elem *info);
-int	check_combi_zero(t_elem *info);
+int		ft_printf(const char *format, ...);
+int		ft_vfprintf(const char *format, va_list ap);
+void	set_arg_value1(va_list ap, t_elem *info);
+void	set_arg_value2(va_list ap, t_elem *info);
+int		scan_flag(char *form, int idx, t_elem *info);
+int		scan_wid(char *form, int idx, t_elem *info);
+int		scan_prec(char *form, int idx, t_elem *info);
+int		scan_len(char *form, int idx, t_elem *info);
+int		scan_spec(char *form, int idx, t_elem *info);
+int		is_flag(int c);
+int		is_wid(int c);
+int		is_prec(int c);
+int		is_len(int c);
+int		is_spec(int c);
+int		is_spec_part1(int c);
+int		is_spec_part2(int c);
+int		check_flag(t_elem *info);
+int		check_wid(t_elem *info);
+int		check_prec(t_elem *info);
+int		check_len(t_elem *info);
+int		check_spec(t_elem *info);
+int		check_combi_minus(t_elem *info);
+int		check_combi_plus(t_elem *info);
+int		check_combi_space(t_elem *info);
+int		check_combi_sharp(t_elem *info);
+int		check_combi_zero(t_elem *info);
+void	lltodec(t_elem *info, long long ll);
+void	lltohex(t_elem *info, long long ll, UINT32 cs);
+void	ptohex(t_elem *info, void *p);
 
 #endif

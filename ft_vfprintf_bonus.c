@@ -12,26 +12,26 @@
 
 #include "ft_printf_bonus.h"
 
-static char	*set_info(char *format, t_elem *info);
-static int	cat_arg(char *buf, int idx, va_list ap, t_elem *info);
-static char	*form_calculation(va_list ap, t_elem *info);
+static void	init_info(t_elem *info);
+static char	*set_arg(char *format, va_list ap, t_elem *info);
+static int	cat_arg(char *buf, int idx, t_elem *info);
 
 int	ft_vfprintf(const char *format, va_list ap)
 {
-	char	buf[100000];
-	int		idx;
-	t_elem	info;
+	static t_elem	info;
+	static char		buf[INT_MAX];
+	int				idx;
 
 	idx = 0;
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			ft_bzero(&info, sizeof(t_elem));
-			format = (const char *) set_info(format + 1, &info);
+			init_info(&info);
+			format = (const char *) set_arg(format + 1, ap, &info);
 			if (!format)
 				return (-1);
-			idx = cat_arg(buf, idx, ap, &info);
+			idx = cat_arg(buf, idx, &info);
 		}
 		else
 			buf[idx++] = *format++;
@@ -40,9 +40,23 @@ int	ft_vfprintf(const char *format, va_list ap)
 	return (idx);
 }
 
-static char	*set_info(char *format, t_elem *info)
+static void	init_info(t_elem *info)
 {
-	int		idx;
+	info->flag = 0;
+	info->wid = 0;
+	info->prec = 0;
+	info->len = 0;
+	info->spec = 0;
+	info->width = 0;
+	info->precis = 0;
+	info->begin = INT_MAX / 2;
+	info->end = INT_MAX / 2;
+	info->neg = 0;
+}
+
+static char	*set_arg(char *format, va_list ap, t_elem *info)
+{
+	int	idx;
 
 	idx = 0;
 	idx = scan_flag(format, idx, info);
@@ -50,32 +64,28 @@ static char	*set_info(char *format, t_elem *info)
 	idx = scan_prec(format, idx, info);
 	idx = scan_len(format, idx, info);
 	idx = scan_spec(format, idx, info);
-	if (!check_spec(info) || !check_flag(info) || !check_wid(info)
-		|| !check_prec(info) || !check_len(info))
+	if (info->wid & WID_STAR)
+		info->width = va_arg(ap, int);
+	if (info->prec & PREC_STAR)
+		info->precis = va_arg(ap, int);
+	if (!check_prec(info) || !check_len(info) || !check_spec(info)
+			|| !check_flag(info) || !check_wid(info)
+			|| info->width < 0 || info->precis < 0)
 		return (0);
+	set_arg_value(ap, info);
 	return (format + idx);
 }
 
-static int	cat_arg(char *buf, int idx, va_list ap, t_elem *info)
+static int	cat_arg(char *buf, int idx, t_elem *info)
 {
-	char	*form;
-
-	form = form_calculation(ap, info);
-	while (*form)
-		buf[idx++] = *form++;
-	free(form);
+	apply_prec(info);
+	apply_base(info);
+	if (info->flag & FLAG_ZERO)
+		apply_wid(info); // 0 && + || 0 && ' ' || 0 && neg : width - 1
+	apply_sign(info);
+	if (!(info->flag & FLAG_ZERO))
+		apply_wid(info);
+	while (*(info->res))
+		buf[idx++] = *(info->res++);
 	return (idx);
-}
-
-static char	*form_calculation(va_list ap, t_elem *info)
-{
-	char	*res;
-	char	*trg;
-
-	trg = cvs_spec(ap, info);
-	trg = app_prec(ap, info, trg);
-	trg = app_base(ap, info, trg);
-	trg = app_sign(ap, info, trg);
-	if (!info->wid)
-		return (trg);
 }

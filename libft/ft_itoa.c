@@ -21,7 +21,6 @@ char	*ft_itoa(int n)
 	char	buf[12];
 	char	*dst;
 	int		i;
-	size_t	len;
 
 	if (!n)
 		return ((char *) ft_memcpy(malloc(2), "0\0", 2));
@@ -35,11 +34,10 @@ char	*ft_itoa(int n)
 	}
 	buf[i] = '\0';
 	reverse(buf, buf[0] == '-', i);
-	len = ft_strlen(buf);
-	dst = (char *) malloc(len + 1);
+	dst = (char *) malloc(i + 1);
 	if (!dst)
 		return (dst);
-	return ((char *) ft_memcpy(dst, buf, len + 1));
+	return ((char *) ft_memcpy(dst, buf, i + 1));
 }
 
 static int	abs2(int n)

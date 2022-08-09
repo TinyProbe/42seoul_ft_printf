@@ -23,6 +23,10 @@ SRC_M		= ft_printf.c			\
 			  ft_form.c				\
 			  ft_iswhat.c			\
 			  ft_iswhat2.c			\
+			  ft_setarg.c			\
+			  ft_lltodec.c			\
+			  ft_lltohex.c			\
+			  ft_ptohex.c			\
 
 SRC_B		= ft_printf_bonus.c		\
 			  ft_vfprintf_bonus.c	\
@@ -31,6 +35,10 @@ SRC_B		= ft_printf_bonus.c		\
 			  ft_form_bonus.c		\
 			  ft_iswhat_bonus.c		\
 			  ft_iswhat2_bonus.c	\
+			  ft_setarg_bonus.c		\
+			  ft_lltodec_bonus.c	\
+			  ft_lltohex_bonus.c	\
+			  ft_ptohex_bonus.c		\
 
 OBJ_M		= $(SRC_M:.c=.o)
 OBJ_B		= $(SRC_B:.c=.o)
