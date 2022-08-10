@@ -37,5 +37,9 @@ int	check_combi_sharp(t_elem *info)
 
 int	check_combi_zero(t_elem *info)
 {
-	return (!(info->spec & (SPEC_C | SPEC_S | SPEC_P | SPEC_N)));
+	if (info->spec & (SPEC_C | SPEC_S | SPEC_P | SPEC_N))
+		return (0);
+	if (info->prec)
+		return (0);
+	return (1);
 }

@@ -16,10 +16,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <limits.h>
 # include "./libft/libft.h"
 
 # define UINT32			unsigned int
+# define UINT64			unsigned long long
+# define MAX_SIZE		1000000000
 
 # define FLAG_MINUS		1u
 # define FLAG_PLUS		2u
@@ -62,9 +63,6 @@
 # define SPEC_N			65536u
 # define SPEC_PERCENT	131072u
 
-# define LOWER			1u
-# define UPPER			2u
-
 typedef struct s_elem
 {
 	UINT32		flag;
@@ -72,9 +70,9 @@ typedef struct s_elem
 	UINT32		prec;
 	UINT32		len;
 	UINT32		spec;
-	size_t		width;
-	size_t		precis;
-	char		res[INT_MAX];
+	int			width;
+	int			precis;
+	char		res[MAX_SIZE];
 	int			begin;
 	int			end;
 	int			neg;
@@ -82,8 +80,7 @@ typedef struct s_elem
 
 int		ft_printf(const char *format, ...);
 int		ft_vfprintf(const char *format, va_list ap);
-void	set_arg_value1(va_list ap, t_elem *info);
-void	set_arg_value2(va_list ap, t_elem *info);
+void	set_arg_value(va_list ap, t_elem *info);
 int		scan_flag(char *form, int idx, t_elem *info);
 int		scan_wid(char *form, int idx, t_elem *info);
 int		scan_prec(char *form, int idx, t_elem *info);
@@ -107,7 +104,11 @@ int		check_combi_space(t_elem *info);
 int		check_combi_sharp(t_elem *info);
 int		check_combi_zero(t_elem *info);
 void	lltodec(t_elem *info, long long ll);
-void	lltohex(t_elem *info, long long ll, UINT32 cs);
+void	lltohex(t_elem *info, long long ll, int up);
 void	ptohex(t_elem *info, void *p);
+void	apply_prec(t_elem *info);
+void	apply_base(t_elem *info);
+void	apply_wid(t_elem *info);
+void	apply_sign(t_elem *info);
 
 #endif

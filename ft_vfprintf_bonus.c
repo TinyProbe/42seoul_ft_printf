@@ -19,7 +19,7 @@ static int	cat_arg(char *buf, int idx, t_elem *info);
 int	ft_vfprintf(const char *format, va_list ap)
 {
 	static t_elem	info;
-	static char		buf[INT_MAX];
+	static char		buf[MAX_SIZE];
 	int				idx;
 
 	idx = 0;
@@ -49,8 +49,8 @@ static void	init_info(t_elem *info)
 	info->spec = 0;
 	info->width = 0;
 	info->precis = 0;
-	info->begin = INT_MAX / 2;
-	info->end = INT_MAX / 2;
+	info->begin = MAX_SIZE / 2;
+	info->end = MAX_SIZE / 2;
 	info->neg = 0;
 }
 
@@ -79,13 +79,17 @@ static char	*set_arg(char *format, va_list ap, t_elem *info)
 static int	cat_arg(char *buf, int idx, t_elem *info)
 {
 	apply_prec(info);
-	apply_base(info);
+	if (!(info->flag & FLAG_ZERO))
+		apply_base(info);
 	if (info->flag & FLAG_ZERO)
+	{
 		apply_wid(info); // 0 && + || 0 && ' ' || 0 && neg : width - 1
+		apply_base(info);
+	}
 	apply_sign(info);
 	if (!(info->flag & FLAG_ZERO))
-		apply_wid(info);
-	while (*(info->res))
-		buf[idx++] = *(info->res++);
+		apply_wid(info); // left sort
+	while (info->begin < info->end)
+		buf[idx++] = info->res[info->begin++];
 	return (idx);
 }

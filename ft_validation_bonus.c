@@ -19,8 +19,7 @@ int	check_flag(t_elem *info)
 	if (!(info->flag ^ (FLAG_PLUS | FLAG_SPACE)))
 		return (0);
 	if (info->spec & (SPEC_O | SPEC_X | SPEC_X_UP)
-		&& !(info->flag ^ (FLAG_SHARP | FLAG_PLUS))
-		|| !(info->flag ^ (FLAG_SHARP | FLAG_SPACE)))
+		&& (info->flag & (FLAG_PLUS | FLAG_SPACE)))
 		return (0);
 	if (info->flag & FLAG_MINUS && !check_combi_minus(info))
 		return (0);

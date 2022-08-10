@@ -1,45 +1,35 @@
 
 #include "ft_printf_bonus.h"
 
-static int	abs2(long long n);
-static void	reverse(char *str, int begin, int end);
-static void	swap(char *a, char *b);
+static void	_rev(char *str, int begin, int end);
+static void	_swap(char *a, char *b);
 
 void	lltodec(t_elem *info, long long ll)
 {
-	if (!n)
-		return ((char *) ft_memcpy(malloc(2), "0\0", 2));
-	i = 0;
-	if (n < 0)
-		buf[i++] = '-';
-	while (n)
+	info->neg = (UINT64) ll & (1ull << 63) || 0;
+	if (!ll)
 	{
-		buf[i++] = abs2(n % 10) + '0';
-		n /= 10;
+		info->res[info->end++] = '0';
+		return ;
 	}
-	buf[i] = '\0';
-	reverse(buf, buf[0] == '-', i);
-	dst = (char *) malloc(i + 1);
-	if (!dst)
-		return (dst);
-	return ((char *) ft_memcpy(dst, buf, i + 1));
+	if (ll < 0)
+		ll = -ll;
+	while (ll)
+	{
+		info->res[info->end++] = ll % 10 + '0';
+		ll /= 10;
+	}
+	_rev(info->res, info->begin, info->end);
 }
 
-static int	abs2(long long n)
-{
-	if (n < 0)
-		return (-n);
-	return (n);
-}
-
-static void	reverse(char *str, int begin, int end)
+static void	_rev(char *str, int begin, int end)
 {
 	--begin;
 	while (++begin < --end)
 		swap(str + begin, str + end);
 }
 
-static void	swap(char *a, char *b)
+static void	_swap(char *a, char *b)
 {
 	if (a == b)
 		return ;
