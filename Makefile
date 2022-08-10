@@ -27,6 +27,7 @@ SRC_M		= ft_printf.c			\
 			  ft_lltodec.c			\
 			  ft_lltohex.c			\
 			  ft_ptohex.c			\
+			  ft_apply.c			\
 
 SRC_B		= ft_printf_bonus.c		\
 			  ft_vfprintf_bonus.c	\
@@ -39,6 +40,7 @@ SRC_B		= ft_printf_bonus.c		\
 			  ft_lltodec_bonus.c	\
 			  ft_lltohex_bonus.c	\
 			  ft_ptohex_bonus.c		\
+			  ft_apply_bonus.c		\
 
 OBJ_M		= $(SRC_M:.c=.o)
 OBJ_B		= $(SRC_B:.c=.o)
