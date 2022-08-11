@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:29:11 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 14:03:22 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/11 15:20:37 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	apply_wid(t_elem *info)
 		{
 			while (info->end - info->begin < info->precis)
 				info->res[--(info->begin)] = '0';
+			apply_sign(info);
 			while (info->end - info->begin < info->width)
 				info->res[--(info->begin)] = ' ';
 		}
