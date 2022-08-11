@@ -6,7 +6,7 @@
 #    By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 12:24:20 by tkong             #+#    #+#              #
-#    Updated: 2022/08/08 09:02:23 by tkong            ###   ########.fr        #
+#    Updated: 2022/08/11 18:42:21 by tkong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,9 @@ SRC_M		= ft_printf.c			\
 			  ft_iswhat.c			\
 			  ft_iswhat2.c			\
 			  ft_setarg.c			\
-			  ft_lltodec.c			\
-			  ft_lltohex.c			\
-			  ft_ptohex.c			\
+			  ft_conversion.c		\
 			  ft_apply.c			\
+			  ft_utils.c			\
 
 SRC_B		= ft_printf_bonus.c		\
 			  ft_vfprintf_bonus.c	\
@@ -37,10 +36,9 @@ SRC_B		= ft_printf_bonus.c		\
 			  ft_iswhat_bonus.c		\
 			  ft_iswhat2_bonus.c	\
 			  ft_setarg_bonus.c		\
-			  ft_lltodec_bonus.c	\
-			  ft_lltohex_bonus.c	\
-			  ft_ptohex_bonus.c		\
+			  ft_conversion_bonus.c	\
 			  ft_apply_bonus.c		\
+			  ft_utils_bonus.c		\
 
 OBJ_M		= $(SRC_M:.c=.o)
 OBJ_B		= $(SRC_B:.c=.o)

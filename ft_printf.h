@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:52:19 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 12:40:09 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/11 19:26:07 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,37 +78,41 @@ typedef struct s_elem
 	int			neg;
 }	t_elem;
 
-int		ft_printf(const char *format, ...);
-int		ft_vfprintf(const char *format, va_list ap);
-void	set_arg_value(va_list ap, t_elem *info);
-int		scan_flag(const char *form, int idx, t_elem *info);
-int		scan_wid(const char *form, int idx, t_elem *info);
-int		scan_prec(const char *form, int idx, t_elem *info);
-int		scan_len(const char *form, int idx, t_elem *info);
-int		scan_spec(const char *form, int idx, t_elem *info);
-int		is_flag(int c);
-int		is_wid(int c);
-int		is_prec(int c);
-int		is_len(int c);
-int		is_spec(int c);
-int		is_spec_part1(int c);
-int		is_spec_part2(int c);
-int		check_flag(t_elem *info);
-int		check_wid(t_elem *info);
-int		check_prec(t_elem *info);
-int		check_len(t_elem *info);
-int		check_spec(t_elem *info);
-int		check_combi_minus(t_elem *info);
-int		check_combi_plus(t_elem *info);
-int		check_combi_space(t_elem *info);
-int		check_combi_sharp(t_elem *info);
-int		check_combi_zero(t_elem *info);
-void	lltodec(t_elem *info, long long ll);
-void	lltohex(t_elem *info, long long ll, int up);
-void	ptohex(t_elem *info, void *p);
-void	apply_prec(t_elem *info);
-void	apply_base(t_elem *info);
-void	apply_wid(t_elem *info);
-void	apply_sign(t_elem *info);
+int			ft_printf(const char *format, ...);
+int			ft_vfprintf(const char *format, va_list ap);
+void		set_arg_value(va_list ap, t_elem *info);
+int			scan_flag(const char *form, int idx, t_elem *info);
+int			scan_wid(const char *form, int idx, t_elem *info);
+int			scan_prec(const char *form, int idx, t_elem *info);
+int			scan_len(const char *form, int idx, t_elem *info);
+int			scan_spec(const char *form, int idx, t_elem *info);
+int			is_flag(int c);
+int			is_wid(int c);
+int			is_prec(int c);
+int			is_len(int c);
+int			is_spec(int c);
+int			is_spec_part1(int c);
+int			is_spec_part2(int c);
+int			check_flag(t_elem *info);
+int			check_wid(t_elem *info);
+int			check_prec(t_elem *info);
+int			check_len(t_elem *info);
+int			check_spec(t_elem *info);
+int			check_combi_minus(t_elem *info);
+int			check_combi_plus(t_elem *info);
+int			check_combi_space(t_elem *info);
+int			check_combi_sharp(t_elem *info);
+int			check_combi_zero(t_elem *info);
+void		itodec(t_elem *info, int i);
+void		utodec(t_elem *info, UINT32 u);
+void		ulltohex(t_elem *info, UINT64 ull, int up);
+void		ptohex(t_elem *info, void *p);
+void		apply_prec(t_elem *info);
+void		apply_base(t_elem *info);
+void		apply_wid(t_elem *info);
+void		apply_sign(t_elem *info);
+long long	_abs(long long ll);
+void		_rev(char *str, int begin, int end);
+void		_swap(char *a, char *b);
 
 #endif
