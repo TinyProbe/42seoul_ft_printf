@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 11:01:31 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 12:43:35 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/11 14:04:34 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,5 @@ int	check_combi_sharp(t_elem *info)
 
 int	check_combi_zero(t_elem *info)
 {
-	if (info->spec & (SPEC_C | SPEC_S | SPEC_P | SPEC_N))
-		return (0);
-	if (info->prec)
-		return (0);
-	return (1);
+	return (!(info->spec & (SPEC_C | SPEC_S | SPEC_P | SPEC_N)));
 }
