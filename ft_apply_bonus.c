@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_apply_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/11 12:29:15 by tkong             #+#    #+#             */
+/*   Updated: 2022/08/11 12:29:17 by tkong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
@@ -31,9 +42,20 @@ void	apply_wid(t_elem *info)
 {
 	if (!info->wid)
 		return ;
-	if (info->flag & FLAG_ZERO
-			&& (info->flag & (FLAG_PLUS | FLAG_SPACE) || info->neg))
-
+	if (info->flag & FLAG_ZERO)
+	{
+		if (info->flag & (FLAG_PLUS | FLAG_SPACE) || info->neg)
+			info->width--;
+		while (info->end - info->begin < info->width)
+			info->res[--(info->begin)] = '0';
+		return ;
+	}
+	if (info->flag & FLAG_MINUS)
+		while (info->end - info->begin < info->width)
+			info->res[info->end++] = ' ';
+	else
+		while (info->end - info->begin < info->width)
+			info->res[--(info->begin)] = ' ';
 }
 
 void	apply_sign(t_elem *info)

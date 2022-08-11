@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lltohex_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/11 12:27:10 by tkong             #+#    #+#             */
+/*   Updated: 2022/08/11 12:46:12 by tkong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
@@ -28,7 +39,7 @@ static void	_rev(char *str, int begin, int end)
 {
 	--begin;
 	while (++begin < --end)
-		swap(str + begin, str + end);
+		_swap(str + begin, str + end);
 }
 
 static void	_swap(char *a, char *b)

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lltodec_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/11 12:26:47 by tkong             #+#    #+#             */
+/*   Updated: 2022/08/11 12:45:36 by tkong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
@@ -6,7 +17,7 @@ static void	_swap(char *a, char *b);
 
 void	lltodec(t_elem *info, long long ll)
 {
-	info->neg = (UINT64) ll & (1ull << 63) || 0;
+	info->neg = ((UINT64) ll & (1ull << 63) || 0);
 	if (!ll)
 	{
 		info->res[info->end++] = '0';
@@ -26,7 +37,7 @@ static void	_rev(char *str, int begin, int end)
 {
 	--begin;
 	while (++begin < --end)
-		swap(str + begin, str + end);
+		_swap(str + begin, str + end);
 }
 
 static void	_swap(char *a, char *b)

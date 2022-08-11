@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:52:19 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/05 14:28:30 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/11 12:40:09 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,70 +18,97 @@
 # include <stdarg.h>
 # include "./libft/libft.h"
 
-# define SPEC_D_OR_I	1
-# define SPEC_U			2
-# define SPEC_O			4
-# define SPEC_X			8
-# define SPEC_X_UP		16
-# define SPEC_F			32
-# define SPEC_F_UP		64
-# define SPEC_E			128
-# define SPEC_E_UP		256
-# define SPEC_G			512
-# define SPEC_G_UP		1024
-# define SPEC_A			2048
-# define SPEC_A_UP		4096
-# define SPEC_C			8192
-# define SPEC_S			16384
-# define SPEC_P			32768
-# define SPEC_N			65536
-# define SPEC_PERCENT	131072
+# define UINT32			unsigned int
+# define UINT64			unsigned long long
+# define MAX_SIZE		1000000000
 
-# define FLAG_MINUS		1
-# define FLAG_PLUS		2
-# define FLAG_SPACE		4
-# define FLAG_SHARP		8
-# define FLAG_ZERO		16
+# define FLAG_MINUS		1u
+# define FLAG_PLUS		2u
+# define FLAG_SPACE		4u
+# define FLAG_SHARP		8u
+# define FLAG_ZERO		16u
 
-# define WID_NUM		1
-# define WID_STAR		2
+# define WID_NUM		1u
+# define WID_STAR		2u
 
-# define PREC_NUM		1
-# define PREC_STAR		2
+# define PREC_DOT		1u
+# define PREC_NUM		2u
+# define PREC_STAR		4u
 
-# define LEN_NONE		1
-# define LEN_HH			2
-# define LEN_H			4
-# define LEN_L			8
-# define LEN_LL			16
-# define LEN_J			32
-# define LEN_Z			64
-# define LEN_T			128
-# define LEN_L_UP		256
+# define LEN_H			1u
+# define LEN_HH			2u
+# define LEN_L			4u
+# define LEN_LL			8u
+# define LEN_J			16u
+# define LEN_Z			32u
+# define LEN_T			64u
+# define LEN_L_UP		128u
+
+# define SPEC_D_OR_I	1u
+# define SPEC_U			2u
+# define SPEC_O			4u
+# define SPEC_X			8u
+# define SPEC_X_UP		16u
+# define SPEC_F			32u
+# define SPEC_F_UP		64u
+# define SPEC_E			128u
+# define SPEC_E_UP		256u
+# define SPEC_G			512u
+# define SPEC_G_UP		1024u
+# define SPEC_A			2048u
+# define SPEC_A_UP		4096u
+# define SPEC_C			8192u
+# define SPEC_S			16384u
+# define SPEC_P			32768u
+# define SPEC_N			65536u
+# define SPEC_PERCENT	131072u
 
 typedef struct s_elem
 {
-	unsigned int	spec;
-	unsigned int	flag;
-	unsigned int	wid;
-	unsigned int	prec;
-	unsigned int	len;
-	size_t			width;
-	size_t			precision;
+	UINT32		flag;
+	UINT32		wid;
+	UINT32		prec;
+	UINT32		len;
+	UINT32		spec;
+	int			width;
+	int			precis;
+	char		res[MAX_SIZE];
+	int			begin;
+	int			end;
+	int			neg;
 }	t_elem;
 
 int		ft_printf(const char *format, ...);
 int		ft_vfprintf(const char *format, va_list ap);
-
-void	scan_spec(char *form, t_elem *info);
-void	scan_flag(char *form, t_elem *info);
-void	scan_wid(char *form, t_elem *info);
-void	scan_prec(char *form, t_elem *info);
-void	scan_len(char *form, t_elem *info);
-int		is_valid_spec(t_elem *info);
-int		is_valid_flag(t_elem *info);
-int		is_valid_wid(t_elem *info);
-int		is_valid_prec(t_elem *info);
-int		is_valid_len(t_elem *info);
+void	set_arg_value(va_list ap, t_elem *info);
+int		scan_flag(const char *form, int idx, t_elem *info);
+int		scan_wid(const char *form, int idx, t_elem *info);
+int		scan_prec(const char *form, int idx, t_elem *info);
+int		scan_len(const char *form, int idx, t_elem *info);
+int		scan_spec(const char *form, int idx, t_elem *info);
+int		is_flag(int c);
+int		is_wid(int c);
+int		is_prec(int c);
+int		is_len(int c);
+int		is_spec(int c);
+int		is_spec_part1(int c);
+int		is_spec_part2(int c);
+int		check_flag(t_elem *info);
+int		check_wid(t_elem *info);
+int		check_prec(t_elem *info);
+int		check_len(t_elem *info);
+int		check_spec(t_elem *info);
+int		check_combi_minus(t_elem *info);
+int		check_combi_plus(t_elem *info);
+int		check_combi_space(t_elem *info);
+int		check_combi_sharp(t_elem *info);
+int		check_combi_zero(t_elem *info);
+void	lltodec(t_elem *info, long long ll);
+void	lltohex(t_elem *info, long long ll, int up);
+void	ptohex(t_elem *info, void *p);
+void	apply_prec(t_elem *info);
+void	apply_base(t_elem *info);
+void	apply_wid(t_elem *info);
+void	apply_sign(t_elem *info);
 
 #endif

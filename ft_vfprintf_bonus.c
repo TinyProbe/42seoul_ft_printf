@@ -6,15 +6,15 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:47 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/08 19:13:23 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/11 12:41:48 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static void	init_info(t_elem *info);
-static char	*set_arg(char *format, va_list ap, t_elem *info);
-static int	cat_arg(char *buf, int idx, t_elem *info);
+static void			init_info(t_elem *info);
+static const char	*set_arg(const char *format, va_list ap, t_elem *info);
+static int			cat_arg(char *buf, int idx, t_elem *info);
 
 int	ft_vfprintf(const char *format, va_list ap)
 {
@@ -28,7 +28,7 @@ int	ft_vfprintf(const char *format, va_list ap)
 		if (*format == '%')
 		{
 			init_info(&info);
-			format = (const char *) set_arg(format + 1, ap, &info);
+			format = set_arg(format + 1, ap, &info);
 			if (!format)
 				return (-1);
 			idx = cat_arg(buf, idx, &info);
@@ -54,7 +54,7 @@ static void	init_info(t_elem *info)
 	info->neg = 0;
 }
 
-static char	*set_arg(char *format, va_list ap, t_elem *info)
+static const char	*set_arg(const char *format, va_list ap, t_elem *info)
 {
 	int	idx;
 
@@ -69,8 +69,8 @@ static char	*set_arg(char *format, va_list ap, t_elem *info)
 	if (info->prec & PREC_STAR)
 		info->precis = va_arg(ap, int);
 	if (!check_prec(info) || !check_len(info) || !check_spec(info)
-			|| !check_flag(info) || !check_wid(info)
-			|| info->width < 0 || info->precis < 0)
+		|| !check_flag(info) || !check_wid(info)
+		|| info->width < 0 || info->precis < 0)
 		return (0);
 	set_arg_value(ap, info);
 	return (format + idx);
@@ -83,12 +83,12 @@ static int	cat_arg(char *buf, int idx, t_elem *info)
 		apply_base(info);
 	if (info->flag & FLAG_ZERO)
 	{
-		apply_wid(info); // 0 && + || 0 && ' ' || 0 && neg : width - 1
+		apply_wid(info);
 		apply_base(info);
 	}
 	apply_sign(info);
 	if (!(info->flag & FLAG_ZERO))
-		apply_wid(info); // left sort
+		apply_wid(info);
 	while (info->begin < info->end)
 		buf[idx++] = info->res[info->begin++];
 	return (idx);

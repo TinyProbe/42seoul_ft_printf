@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_setarg_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/11 12:28:31 by tkong             #+#    #+#             */
+/*   Updated: 2022/08/11 12:44:48 by tkong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
@@ -25,7 +36,7 @@ void	set_arg_value(va_list ap, t_elem *info)
 
 static void	stores(t_elem *info, const char *s)
 {
-	size_t	precis;
+	int	precis;
 
 	precis = 0;
 	while (*s && (!info->prec || precis++ < info->precis))

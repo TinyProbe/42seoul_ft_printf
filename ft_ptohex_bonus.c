@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ptohex_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/11 12:28:08 by tkong             #+#    #+#             */
+/*   Updated: 2022/08/11 12:49:01 by tkong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
@@ -6,17 +17,19 @@ static void	_swap(char *a, char *b);
 
 void	ptohex(t_elem *info, void *p)
 {
-	const char	*const hexchr = "0123456789abcdef";
+	const char *const	hexchr = "0123456789abcdef";
+	long long			pp;
 
-	if (!(long long) p)
+	pp = (long long) p;
+	if (!pp)
 	{
 		info->res[info->end++] = '0';
 		return ;
 	}
-	while ((long long) p)
+	while (pp)
 	{
-		info->res[info->end++] = hexchr[(long long) p % 16];
-		(long long) p /= 16;
+		info->res[info->end++] = hexchr[pp % 16];
+		pp /= 16;
 	}
 	_rev(info->res, info->begin, info->end);
 }
@@ -25,7 +38,7 @@ static void	_rev(char *str, int begin, int end)
 {
 	--begin;
 	while (++begin < --end)
-		swap(str + begin, str + end);
+		_swap(str + begin, str + end);
 }
 
 static void	_swap(char *a, char *b)
