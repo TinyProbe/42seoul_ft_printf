@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:29:11 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 15:20:37 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/11 16:56:26 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	apply_prec(t_elem *info)
 {
 	if (info->prec)
+	{
 		while (info->end - info->begin < info->precis)
 			info->res[--(info->begin)] = '0';
+		info->flag -= (info->flag & FLAG_ZERO);
+	}
 }
 
 void	apply_base(t_elem *info)
@@ -40,23 +43,18 @@ void	apply_base(t_elem *info)
 
 void	apply_wid(t_elem *info)
 {
-	if (!info->wid)
-		return ;
 	if (info->flag & FLAG_ZERO)
 	{
 		if (info->flag & (FLAG_PLUS | FLAG_SPACE) || info->neg)
 			info->width--;
-		if (info->prec)
+		else if (info->flag & FLAG_SHARP)
 		{
-			while (info->end - info->begin < info->precis)
-				info->res[--(info->begin)] = '0';
-			apply_sign(info);
-			while (info->end - info->begin < info->width)
-				info->res[--(info->begin)] = ' ';
+			info->width--;
+			if (info->spec & (SPEC_X | SPEC_X_UP))
+				info->width--;
 		}
-		else
-			while (info->end - info->begin < info->width)
-				info->res[--(info->begin)] = '0';
+		while (info->end - info->begin < info->width)
+			info->res[--(info->begin)] = '0';
 		return ;
 	}
 	if (info->flag & FLAG_MINUS)

@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:29:15 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 15:39:55 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/11 16:53:56 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ void	apply_wid(t_elem *info)
 	{
 		if (info->flag & (FLAG_PLUS | FLAG_SPACE) || info->neg)
 			info->width--;
+		else if (info->flag & FLAG_SHARP)
+		{
+			info->width--;
+			if (info->spec & (SPEC_X | SPEC_X_UP))
+				info->width--;
+		}
 		while (info->end - info->begin < info->width)
 			info->res[--(info->begin)] = '0';
 		return ;

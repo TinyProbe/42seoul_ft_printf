@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:12:38 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 15:20:59 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/11 16:56:57 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ static int	cat_arg(char *buf, int idx, t_elem *info)
 		apply_wid(info);
 		apply_base(info);
 	}
-	if (!(info->prec))
-		apply_sign(info);
+	apply_sign(info);
 	if (!(info->flag & FLAG_ZERO))
 		apply_wid(info);
 	while (info->begin < info->end)
