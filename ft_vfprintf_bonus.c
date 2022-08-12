@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:47 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/12 16:22:27 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/12 18:29:02 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ static const char	*set_arg(const char *format, va_list ap, t_elem *info)
 		info->width = va_arg(ap, int);
 	if (info->prec & PREC_STAR)
 		info->precis = va_arg(ap, int);
-	if (!check_prec(info) || !check_len(info) || !check_spec(info)
-		|| !check_flag(info) || !check_wid(info)
-		|| info->width < 0 || info->precis < 0)
-		return (0);
+	if (!(info->spec & SPEC_PERCENT))
+		if (!check_prec(info) || !check_len(info) || !check_spec(info)
+			|| !check_flag(info) || !check_wid(info)
+			|| info->width < 0 || info->precis < 0)
+			return (0);
 	if (info->spec & SPEC_P)
 		info->flag |= FLAG_SHARP;
 	set_arg_value(ap, info);
