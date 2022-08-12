@@ -85,18 +85,10 @@ fclean :	clean
 	$(RM) $(LIB) $(NAME)
 
 re :
-ifneq (, $(wildcard $(CUR_B)))
-	make fclean
-	make -C ./libft bonus
-	mv $(LIB) $(NAME)
-	$(CC) $(CFLAG) $(OBJFLAG) $(SRC_B)
-	$(AR) $(ARFLAG) $(NAME) $(OBJ_B)
-else
 	make fclean
 	make -C ./libft all
 	mv $(LIB) $(NAME)
 	$(CC) $(CFLAG) $(OBJFLAG) $(SRC_M)
 	$(AR) $(ARFLAG) $(NAME) $(OBJ_M)
-endif
 
 .PHONY :	all bonus clean fclean re
