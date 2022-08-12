@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:26:47 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 18:48:11 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/12 10:51:24 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ulltohex(t_elem *info, UINT64 ull, int up)
 	if (!ull)
 	{
 		info->res[info->end++] = '0';
+		info->flag -= (info->flag & FLAG_SHARP);
 		return ;
 	}
 	while (ull)

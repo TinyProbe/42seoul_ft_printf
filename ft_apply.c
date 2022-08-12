@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:29:11 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 16:56:26 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/12 10:37:19 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	apply_prec(t_elem *info)
 {
-	if (info->prec)
+	if (info->prec && !(info->spec & SPEC_S))
 	{
 		while (info->end - info->begin < info->precis)
 			info->res[--(info->begin)] = '0';
