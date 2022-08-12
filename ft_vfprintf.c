@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:12:38 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 19:25:35 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:26:20 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	ft_vfprintf(const char *format, va_list ap)
 		else
 			buf[idx++] = *format++;
 	}
-	write(1, buf, idx);
+	if (!~write(1, buf, idx))
+		return (-1);
 	return (idx);
 }
 
@@ -72,6 +73,8 @@ static const char	*set_arg(const char *format, va_list ap, t_elem *info)
 		|| !check_flag(info) || !check_wid(info)
 		|| info->width < 0 || info->precis < 0)
 		return (0);
+	if (info->spec & SPEC_P)
+		info->flag |= FLAG_SHARP;
 	set_arg_value(ap, info);
 	return (format + idx);
 }

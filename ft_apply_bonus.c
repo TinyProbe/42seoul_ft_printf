@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:29:15 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/12 10:36:05 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:04:31 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	apply_prec(t_elem *info)
 
 void	apply_base(t_elem *info)
 {
-	if (info->flag & FLAG_SHARP || info->spec & SPEC_P)
+	if (info->flag & FLAG_SHARP)
 	{
 		if (info->spec & SPEC_O)
 			info->res[--(info->begin)] = '0';

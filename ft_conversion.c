@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:26:39 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/12 10:53:04 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/12 16:57:57 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	itodec(t_elem *info, int i)
 	info->neg = ((UINT32) i & (1u << 31) || 0);
 	if (!i)
 	{
-		info->res[info->end++] = '0';
+		if (!(info->prec) || info->precis)
+			info->res[info->end++] = '0';
 		return ;
 	}
 	while (i)
@@ -32,7 +33,8 @@ void	utodec(t_elem *info, UINT32 u)
 {
 	if (!u)
 	{
-		info->res[info->end++] = '0';
+		if (!(info->prec) || info->precis)
+			info->res[info->end++] = '0';
 		return ;
 	}
 	while (u)
@@ -52,8 +54,9 @@ void	ulltohex(t_elem *info, UINT64 ull, int up)
 		hexchr = "0123456789ABCDEF";
 	if (!ull)
 	{
-		info->res[info->end++] = '0';
 		info->flag -= (info->flag & FLAG_SHARP);
+		if (!(info->prec) || info->precis)
+			info->res[info->end++] = '0';
 		return ;
 	}
 	while (ull)
