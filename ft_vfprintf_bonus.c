@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:47 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/12 18:29:02 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/12 20:07:23 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static const char	*set_arg(const char *format, va_list ap, t_elem *info)
 			return (0);
 	if (info->spec & SPEC_P)
 		info->flag |= FLAG_SHARP;
+	if (info->spec & SPEC_PERCENT)
+		info->flag -= (info->flag & FLAG_ZERO);
 	set_arg_value(ap, info);
 	return (format + idx);
 }
