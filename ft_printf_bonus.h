@@ -6,7 +6,7 @@
 /*   By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 07:08:58 by tkong             #+#    #+#             */
-/*   Updated: 2022/08/11 19:23:20 by tkong            ###   ########.fr       */
+/*   Updated: 2022/08/12 11:28:02 by tkong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PRINTF_BONUS_H
 
 # include <unistd.h>
-# include <stdlib.h>
 # include <stdarg.h>
 # include "./libft/libft.h"
 
