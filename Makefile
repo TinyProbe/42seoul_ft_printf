@@ -6,7 +6,7 @@
 #    By: tkong <tkong@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 12:24:20 by tkong             #+#    #+#              #
-#    Updated: 2022/08/11 18:42:21 by tkong            ###   ########.fr        #
+#    Updated: 2022/08/12 17:41:45 by tkong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,17 +42,19 @@ SRC_B		= ft_printf_bonus.c		\
 
 OBJ_M		= $(SRC_M:.c=.o)
 OBJ_B		= $(SRC_B:.c=.o)
+CUR_M		= ft_printf.o
+CUR_B		= ft_printf_bonus.o
 LIB			= ./libft/libft.a
 RM			= rm -f
 
 ifdef B
 	SEL		= $(OBJ_B)
 	UNSEL	= $(OBJ_M)
-	CUR		= ft_printf_bonus.o
+	CUR		= $(CUR_B)
 else
 	SEL		= $(OBJ_M)
 	UNSEL	= $(OBJ_B)
-	CUR		= ft_printf.o
+	CUR		= $(CUR_M)
 endif
 
 %.o :		%.c
@@ -82,6 +84,19 @@ clean :
 fclean :	clean
 	$(RM) $(LIB) $(NAME)
 
-re :		fclean all
+re :
+ifneq (, $(wildcard $(CUR_B)))
+	make fclean
+	make -C ./libft bonus
+	mv $(LIB) $(NAME)
+	$(CC) $(CFLAG) $(OBJFLAG) $(SRC_B)
+	$(AR) $(ARFLAG) $(NAME) $(OBJ_B)
+else
+	make fclean
+	make -C ./libft all
+	mv $(LIB) $(NAME)
+	$(CC) $(CFLAG) $(OBJFLAG) $(SRC_M)
+	$(AR) $(ARFLAG) $(NAME) $(OBJ_M)
+endif
 
 .PHONY :	all bonus clean fclean re
